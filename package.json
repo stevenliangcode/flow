@@ -1,7 +1,15 @@
 {
   "name": "flow",
   "version": "0.1.0",
+  "private": true,
   "description": "Desktop study timer that pays you $1 for every minute of focus",
+  "author": "Steven Liang",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stevenliangcode/flow.git"
+  },
+  "homepage": "https://github.com/stevenliangcode/flow#readme",
   "scripts": {
     "start": "vite build && npm run build:electron && electron .",
     "dev": "npm run build:electron && concurrently -k -n ui,app -c magenta,green \"vite\" \"electron . --dev\"",
@@ -29,7 +37,6 @@
     "typescript": "^7.0.2",
     "vite": "^8.3.5"
   },
-  "private": true,
   "main": "dist-electron/main.cjs",
   "build": {
     "appId": "com.flow.studytimer",
@@ -51,7 +58,8 @@
     "nsis": {
       "oneClick": true,
       "perMachine": false,
-      "shortcutName": "Flow"
+      "shortcutName": "Flow",
+      "artifactName": "${productName}-Setup-${version}.${ext}"
     }
   }
 }

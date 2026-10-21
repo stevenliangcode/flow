@@ -2,15 +2,21 @@
 
 A Windows desktop study timer that pays you $1 (configurable) for every whole minute of focus.
 
-## Install
+## Download
+
+Get `Flow-Setup-<version>.exe` from the
+[latest release](https://github.com/stevenliangcode/flow/releases/latest) and run it.
+
+The installer isn't code-signed, so Windows SmartScreen will warn you once: choose
+**More info → Run anyway**. Flow runs entirely on your computer; your history is stored in
+`%APPDATA%\Flow\flow.db` and never leaves it.
+
+To build the installer yourself instead (Node.js 22+):
 
 ```bash
 npm install
-npm run dist       # builds release/Flow Setup <version>.exe
+npm run dist       # writes release/Flow-Setup-<version>.exe
 ```
-
-Run the installer. It's unsigned, so Windows SmartScreen will ask once: choose
-**More info → Run anyway**. Your data lives in `%APPDATA%\Flow\flow.db`.
 
 ## Features
 
@@ -46,6 +52,20 @@ npm test           # timer logic tests
 npm run typecheck
 npm run icon       # regenerate build/icon.png
 ```
+
+### Releasing
+
+Bump `version` in `package.json`, commit, then push a matching tag:
+
+```bash
+git tag v0.2.0
+git push origin v0.2.0
+```
+
+The [Release workflow](.github/workflows/release.yml) tests, builds the installer on
+Windows, and publishes it as a GitHub Release.
+
+### Layout
 
 ```
 core/      SQLite schema and timer logic + tests
