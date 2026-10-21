@@ -1,0 +1,57 @@
+{
+  "name": "flow",
+  "version": "0.1.0",
+  "description": "Desktop study timer that pays you $1 for every minute of focus",
+  "scripts": {
+    "start": "vite build && npm run build:electron && electron .",
+    "dev": "npm run build:electron && concurrently -k -n ui,app -c magenta,green \"vite\" \"electron . --dev\"",
+    "dist": "vite build && npm run build:electron && electron-builder --win",
+    "build:electron": "node scripts/build-electron.mjs",
+    "icon": "tsx scripts/make-icon.ts",
+    "test": "tsx --test \"core/**/*.test.ts\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "concurrently": "^10.0.6",
+    "electron": "^45.0.0",
+    "electron-builder": "^26.15.3",
+    "esbuild": "^0.28.2",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5"
+  },
+  "private": true,
+  "main": "dist-electron/main.cjs",
+  "build": {
+    "appId": "com.flow.studytimer",
+    "productName": "Flow",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist-electron/**",
+      "web/dist/**",
+      "!**/*.map",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "shortcutName": "Flow"
+    }
+  }
+}
